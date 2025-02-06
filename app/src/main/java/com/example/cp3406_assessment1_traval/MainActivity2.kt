@@ -40,7 +40,7 @@ class MainActivity2 : ComponentActivity() {
 }
 @Composable
 fun TravelDisplay(modifier: Modifier = Modifier) {
-    val items = listOf("8:00am Singapore airline\n     Flight number: CA123", "12:00 check in \n     Location: Marina Bay Sands Hotel", "17:00pm ABC swimming poor\n     Location:Marina Square", "20:00 Watch fireworks\n     Location: Marina Bay Sands Hotel","wwwwww","hhhhhh","6666666", "888888888","yyyyyyyy")
+    val items = listOf("8:00am Singapore airline\n     Flight number: CA123", "12:00 check in \n     Location: Marina Bay Sands Hotel", "17:00pm ABC swimming poor\n     Location:Marina Square", "20:00 Watch fireworks\n     Location: Marina Bay Sands Hotel")
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Top,) {
         Text(text = "Today's itinerary",
             fontSize = 30.sp,
