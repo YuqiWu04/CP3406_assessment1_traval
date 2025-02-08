@@ -87,30 +87,34 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .heightIn(min = 300.dp)
+                .heightIn(min = 300.dp),
+            elevation = CardDefaults.cardElevation(4.dp)
 
 
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(text = "Today's itinerary", style = MaterialTheme.typography.headlineLarge)
+            Column(modifier = Modifier.padding(13.dp)) {
+                Text(text = "Today's itinerary: Singapore", style = MaterialTheme.typography.headlineLarge)
 
                 Spacer(modifier = Modifier.height(16.dp))
 
 
                 Text(
-                    text = "07/02/2025",
+                    text = "07/02/2025, Weather:25-31c Cloudy...",
                     maxLines = 3
                 )
 
-                // 阅读更多
+
                 TextButton(onClick = { /* 展开更多 */ }) {
                     Text(text = "Read More")
                 }
 
-                // 价格 + 按钮
+
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     LazyColumn(modifier = Modifier
                         .height(400.dp)
@@ -123,7 +127,8 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
 
                         .shadow(10.dp, RoundedCornerShape(10.dp))
                     .background(Color.White ,shape = RoundedCornerShape(16.dp))
-                        .padding(16.dp)){
+                        .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, // 水平居中
+                    verticalArrangement = Arrangement.Center){
 
                     Text(
                     text = "⚡\uFE0F${items[index]}",
@@ -131,6 +136,13 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
                         color = Color.Black
 
                 )
+                    Button(
+                        onClick = {  },
+                        modifier = Modifier.padding(start = 10.dp),
+
+                    ) {
+                        Text(text = "Map")
+                    }
                     }
 
 
@@ -142,41 +154,7 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
     }
 }
 
-//    val items = listOf("8:00am Singapore airline\n     Flight number: CA123", "12:00 check in \n     Location: Marina Bay Sands Hotel", "17:00pm ABC swimming poor\n     Location:Marina Square", "20:00 Watch fireworks\n     Location: Marina Bay Sands Hotel")
-//    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Top,) {
-//        Text(text = "Today's itinerary",
-//            fontSize = 30.sp,
-//            modifier =modifier ,
-//            lineHeight = 28.sp,
-//
-//
-//        )
-//        Spacer(modifier = Modifier.height(50.dp))
-//
-//
-//
-//        LazyColumn {
-//            items(items.size) { index ->
-//                Box(
-//                    modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(16.dp)
-//                    .background(Color.Gray ,shape = RoundedCornerShape(16.dp))
-//                        .padding(16.dp)){
-//
-//                    Text(
-//                    text = "⚡\uFE0F${items[index]}",
-//                    fontSize = 20.sp,
-//                        color = Color.White
-//
-//                )
-//                    }
-//
-//
-//            }
-//        }
-//    }
-//}
+
 
 @Preview(showBackground = true, name = "TravelDisplay")
 @Composable
