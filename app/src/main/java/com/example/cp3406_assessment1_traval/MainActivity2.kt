@@ -82,15 +82,15 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
                 .height(450.dp)
         )
         Card(
+            colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp),
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
                 .heightIn(min = 300.dp)
-                .background(Color.White,shape  = RoundedCornerShape(35.dp))
+
 
         ) {
-            // 可滚动或固定布局的容器
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(text = "Today's itinerary", style = MaterialTheme.typography.headlineLarge)
 
