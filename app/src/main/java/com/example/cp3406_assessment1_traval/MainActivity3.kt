@@ -80,10 +80,10 @@ fun ImageCard(category: CategoryItem) {
 data class CategoryItem(val iconRes: Int, val label: String)
 @Composable
 fun CategoryIconsRow(){
-    val categories = listOf( CategoryItem(R.drawable.traval, "Flights"),
+    val categories = listOf( CategoryItem(R.drawable.traval, "Itinerary"),
     CategoryItem(R.drawable.budget, "Finance"),
-    CategoryItem(R.drawable.smart, "Bell"),
-    CategoryItem(R.drawable.setting, "Settings"))
+    CategoryItem(R.drawable.smart, "Notification"),
+    CategoryItem(R.drawable.bookingmanagenment, "Booking Management"))
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(13.dp)
@@ -153,7 +153,7 @@ fun DashboardView(modifier: Modifier = Modifier) {
         )
         Card(
             shape = RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp),
-            colors = CardDefaults.cardColors(containerColor = Color((0xFFF0F8FF))), // 正确设置背景色
+            colors = CardDefaults.cardColors(containerColor = Color((0xFFF0F8FF))),
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)

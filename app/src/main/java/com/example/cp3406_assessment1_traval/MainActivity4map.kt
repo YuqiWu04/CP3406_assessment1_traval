@@ -59,6 +59,7 @@ class MainActivity4map : ComponentActivity() {
             CP3406_assessment1_travalTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     MapView(modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }

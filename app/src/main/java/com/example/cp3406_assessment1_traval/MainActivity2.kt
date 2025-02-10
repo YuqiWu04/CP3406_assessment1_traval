@@ -104,7 +104,7 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
                 )
 
 
-                TextButton(onClick = { /* 展开更多 */ }) {
+                TextButton(onClick = {  }) {
                     Text(text = "Read More")
                 }
 
