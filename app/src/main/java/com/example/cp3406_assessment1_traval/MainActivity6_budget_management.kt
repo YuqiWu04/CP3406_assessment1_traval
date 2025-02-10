@@ -55,7 +55,9 @@ class MainActivity6_budget_management :  ComponentActivity() {
 
 @Composable
 fun BudgetManageView(modifier: Modifier = Modifier){
- Column(modifier = Modifier.fillMaxSize().background(Color(0xFFADD8E6)), horizontalAlignment = Alignment.CenterHorizontally,){
+ Column(modifier = Modifier
+     .fillMaxSize()
+     .background(Color(0xFFADD8E6)), horizontalAlignment = Alignment.CenterHorizontally,){
      MyTopAppBar()
      BudgetProgressPresentation()
      Text(text = "_____________________________________________________________")
@@ -66,8 +68,7 @@ fun BudgetManageView(modifier: Modifier = Modifier){
 
 @Composable
 fun PaymentContentDisplay(){
-    val payments = listOf(
-        PaymentItem(
+    val payments = listOf(PaymentItem(
             "XXX Restaurant",
             500.00,
             "2023-04-01",
@@ -141,24 +142,27 @@ data class PaymentItem(
 @Composable
 fun BudgetProgressPresentation(){
     val progress = 0.5f
-
-        Column(modifier = Modifier.padding(40.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-            Text(text = "Budget schedule: ${(progress * 100).toInt()}%", fontSize = 24.sp)
-            LinearProgressIndicator(
-                progress = {
-                    progress
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(8.dp)
-                    .clip(RoundedCornerShape(4.dp)),
-                color = Color(0xFF5EAA99),
-                trackColor = Color.LightGray,
-            )
-            Text(text = "Spendings: $9000.00/18000", fontSize = 20.sp)
-        }
-
+    Column(
+        modifier = Modifier.padding(40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Budget schedule: ${(progress * 100).toInt()}%", fontSize = 24.sp)
+        LinearProgressIndicator(
+            progress = {
+                progress
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(8.dp)
+                .clip(RoundedCornerShape(4.dp)),
+            color = Color(0xFF5EAA99),
+            trackColor = Color.LightGray,
+        )
+        Text(text = "Spendings: $9000.00/18000", fontSize = 20.sp)
     }
+
+}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
