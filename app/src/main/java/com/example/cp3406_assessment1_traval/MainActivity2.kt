@@ -69,7 +69,7 @@ class MainActivity2 : ComponentActivity() {
 }
 @Composable
 fun TravelDisplay(modifier: Modifier = Modifier) {
-    val items = listOf("8:00am Singapore airline\n     Flight number: CA123", "12:00 check in \n     Location: Marina Bay Sands Hotel", "17:00pm ABC swimming poor\n     Location:Marina Square", "wwwwww\n" +
+    val items = listOf("⚡\uFE0F\$8:00am Singapore airline\n     Flight number: CA123", "⚡\uFE0F\\12:00 check in \n     Location: Marina Bay Sands Hotel", "17:00pm ABC swimming poor\n     Location:Marina Square", "wwwwww\n" +
             "     Location:Marina Square","tttttt\n",
             "     Location:Marina Square")
     Box(modifier = Modifier.fillMaxSize()) {
@@ -103,10 +103,14 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
                     maxLines = 3
                 )
 
-
-                TextButton(onClick = {  }) {
-                    Text(text = "Read More")
-                }
+Row(modifier = Modifier.fillMaxWidth()){
+    TextButton(onClick = {  }) {
+        Text(text = "Read More")
+    }
+    TextButton(onClick = {  }) {
+        Text(text = "AI-Assisted Planning")
+    }
+}
 
 
                 Row(
@@ -126,23 +130,33 @@ fun TravelDisplay(modifier: Modifier = Modifier) {
                     .padding(16.dp)
 
                         .shadow(10.dp, RoundedCornerShape(10.dp))
-                    .background(Color.White ,shape = RoundedCornerShape(16.dp))
+                    .background(Color.White ,shape = RoundedCornerShape(12.dp))
                         .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, // 水平居中
                     verticalArrangement = Arrangement.Center){
 
                     Text(
-                    text = "⚡\uFE0F${items[index]}",
+                    text = items[index],
                     fontSize = 20.sp,
                         color = Color.Black
 
                 )
+                Row(){
                     Button(
                         onClick = {  },
                         modifier = Modifier.padding(start = 10.dp),
 
-                    ) {
+                        ) {
                         Text(text = "Map")
                     }
+                    Button(
+                        onClick = {  },
+                        modifier = Modifier.padding(start = 10.dp),
+
+                        ) {
+                        Text(text = "EDIT")
+                    }
+                }
+
                     }
 
 

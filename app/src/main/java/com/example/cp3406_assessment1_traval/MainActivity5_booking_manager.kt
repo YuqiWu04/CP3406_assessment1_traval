@@ -18,12 +18,20 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,15 +63,12 @@ class MainActivity5_booking_manager : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun BookingManagerPageView(modifier: Modifier=Modifier){
     Column(modifier = Modifier.fillMaxSize()){
-Card( colors = CardDefaults.cardColors(containerColor = Color.Unspecified),shape = RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp, bottomEnd = 35.dp, bottomStart = 35.dp),){
-    Text(text = "Your Butler's\nAssistant", modifier = Modifier.padding(50.dp),
-        fontSize = 18.sp
-    )
-}
-
+        MyTopApp()
+        Spacer(modifier = Modifier.height(40.dp))
         BookingClassificationShow()
         Spacer(modifier = Modifier.height(20.dp))
         Text(text = "Date: 01/11/2024 Booking Information", fontSize = 20.sp)
@@ -97,7 +102,25 @@ data class ImageItem(
     val imageRes: Int,
     val title: String
 )
-
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MyTopApp() {
+    TopAppBar(
+        title = { Text("Your booking housekeeper！", color = Color.Black, fontSize = 20.sp) },
+        navigationIcon = {
+            IconButton(onClick = {  }) {
+                Icon(Icons.Default.Menu, contentDescription = "Menu", tint = Color.Black)
+            }
+        },
+        actions = {
+            IconButton(onClick = {  }) {
+                Icon(Icons.Default.Add, contentDescription = "Add", tint = Color.Black)
+            }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Color(0xFF5EAA99),
+        ))
+}
 @Composable
 fun BooingImageView() {
     val Tickets = listOf(

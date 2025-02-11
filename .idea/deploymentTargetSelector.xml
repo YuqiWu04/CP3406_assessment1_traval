@@ -21,7 +21,7 @@
       </SelectionState>
       <SelectionState runConfigName="MainActivity6_budget_management">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-02-10T17:15:39.248580Z">
+        <DropdownSelection timestamp="2025-02-10T17:24:46.630913Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/yukey/.android/avd/Pixel_9_Pro_API_35.avd" />

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,11 +58,24 @@ class MainActivity6_budget_management :  ComponentActivity() {
 fun BudgetManageView(modifier: Modifier = Modifier){
  Column(modifier = Modifier
      .fillMaxSize()
-     .background(Color(0xFFADD8E6)), horizontalAlignment = Alignment.CenterHorizontally,){
-     MyTopAppBar()
-     BudgetProgressPresentation()
-     Text(text = "_____________________________________________________________")
-     PaymentContentDisplay()
+     .background(Color.White), horizontalAlignment = Alignment.CenterHorizontally,){
+     Box(modifier = Modifier
+         .weight(0.5f)
+         .fillMaxWidth()
+         .background(Color(0xFF5EAA99)),
+         contentAlignment = Alignment.TopCenter) {
+         Column (){ MyTopAppBar()
+             BudgetProgressPresentation()
+         }
+
+     }
+     Box(modifier = Modifier
+         .weight(1f)
+         .fillMaxWidth()
+         .background(Color.White),
+         contentAlignment = Alignment.Center) {
+         PaymentContentDisplay()
+     }
  }
 
 }
@@ -94,7 +108,7 @@ fun PaymentContentDisplay(){
         )
     )
 
-        PaymentsShow(payments)
+    PaymentsShow(payments)
 
 }
 @Composable
@@ -143,9 +157,10 @@ data class PaymentItem(
 fun BudgetProgressPresentation(){
     val progress = 0.5f
     Column(
-        modifier = Modifier.padding(40.dp),
+        modifier = Modifier.padding(40.dp).background(Color(0XFF5EAA99)),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+
     ) {
         Text(text = "Budget schedule: ${(progress * 100).toInt()}%", fontSize = 24.sp)
         LinearProgressIndicator(
@@ -156,7 +171,7 @@ fun BudgetProgressPresentation(){
                 .fillMaxWidth()
                 .height(8.dp)
                 .clip(RoundedCornerShape(4.dp)),
-            color = Color(0xFF5EAA99),
+            color = Color.Red,
             trackColor = Color.LightGray,
         )
         Text(text = "Spendings: $9000.00/18000", fontSize = 20.sp)
@@ -181,7 +196,7 @@ fun MyTopAppBar() {
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color(0xFFADD8E6),
+            containerColor = Color(0xFF5EAA99),
     ))
 }
 
