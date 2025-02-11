@@ -144,7 +144,7 @@ fun CityCard(city: CategoryItem) {
 fun DashboardView(modifier: Modifier = Modifier) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(id = R.drawable.recommendation),
+            painter = painterResource(id = R.drawable.back),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier

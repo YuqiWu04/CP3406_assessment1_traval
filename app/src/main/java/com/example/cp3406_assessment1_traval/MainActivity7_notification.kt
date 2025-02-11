@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,6 +28,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -42,6 +44,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -68,14 +72,23 @@ class MainActivity7_notification : ComponentActivity() {
 fun NotificationView(modifier: Modifier = Modifier){
 Box( modifier = Modifier
     .fillMaxSize()
+    .padding(bottom = 8.dp)
     .background(Color(0xFF5EAA99))){
+    Image(
+        painter = painterResource(id = R.drawable.smartplane),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(450.dp)
+    )
         Text(text = "Important Notification",
             fontWeight = FontWeight.Bold,
-            fontSize = 55.sp,
-            lineHeight = 100.sp,color = Color.White,
+            fontSize = 40.sp,
+            lineHeight = 50.sp,color = Color.White,
             modifier = Modifier
-                .padding(16.dp)
-                .padding(16.dp) )
+                    .padding(horizontal = 16.dp, vertical = 28.dp) )
+    Spacer(modifier = Modifier.height(8.dp))
         Card(colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RoundedCornerShape(topStart = 15.dp, topEnd = 15.dp),
             modifier = Modifier
@@ -151,38 +164,6 @@ fun NotificationDetailShow(){
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun PartialBottomSheet() {
-    var showBottomSheet by remember { mutableStateOf(false) }
-    val sheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = false,
-    )
-
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Button(
-            onClick = { showBottomSheet = true }
-        ) {
-            Text("Display partial bottom sheet")
-        }
-
-        if (showBottomSheet) {
-            ModalBottomSheet(
-                modifier = Modifier.fillMaxHeight(),
-                sheetState = sheetState,
-                onDismissRequest = { showBottomSheet = false }
-            ) {
-                Text(
-                    "Swipe up to open sheet. Swipe down to dismiss.",
-                    modifier = Modifier.padding(16.dp)
-                )
-            }
-        }
-    }
-}
 
 @Preview(showBackground = true, name = "Notification")
 @Composable
