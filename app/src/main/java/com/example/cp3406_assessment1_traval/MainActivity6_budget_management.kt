@@ -200,7 +200,7 @@ fun MyTopAppBar() {
     ))
 }
 
-@Preview
+@Preview(showBackground = true, name = "Budget Management")
 @Composable
 fun BudgetManageDisplay(){
     BudgetManageView()
