@@ -36,6 +36,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cp3406_assessment1_traval.ui.theme.CP3406_assessment1_travalTheme
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
+
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
 class MainActivity3 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +60,38 @@ class MainActivity3 : ComponentActivity() {
             CP3406_assessment1_travalTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     DashboardView(modifier = Modifier.padding(innerPadding))
+                    BottomNavigationHomeUI()
                 }
             }
     }}
+}
+@Composable
+fun BottomNavigationHomeUI() {
+    var selectedIndex by remember { mutableStateOf(0) }
+    val navItems = listOf(
+        NavItem("Home", Icons.Default.Home),
+        NavItem("Travel", Icons.Default.DateRange),
+        NavItem("Booking", Icons.Default.Check),
+        NavItem("Budget", Icons.Default.Person),
+        NavItem("Notification", Icons.Default.Notifications)
+    )
+
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                navItems.forEachIndexed { index, item ->
+                    NavigationBarItem(
+                        selected = selectedIndex == index,
+                        onClick = { selectedIndex = index },
+                        icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                        label = { Text(text = item.title) }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        DashboardView(modifier = Modifier.padding(innerPadding))
+    }
 }
 @Composable
 fun ImageCard(category: CategoryItem) {
@@ -60,14 +105,18 @@ fun ImageCard(category: CategoryItem) {
                 .clip(RoundedCornerShape(18.dp)),
             elevation = CardDefaults.cardElevation(4.dp)
         ) {
+
             Image(
                 painter = painterResource(category.iconRes),
                 contentDescription = "Image",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize().clickable {
+                    println("Image Button Clicked!")
+                }
             )
         }
         Spacer(modifier = Modifier.height(5.dp))
+
         Text(
             text = category.label,
             fontSize = 16.sp,
@@ -193,5 +242,6 @@ fun DashboardView(modifier: Modifier = Modifier) {
 @Composable
 fun DashboardShow() {
     DashboardView()
+    BottomNavigationHomeUI()
 }
 

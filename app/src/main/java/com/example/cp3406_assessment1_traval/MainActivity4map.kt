@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -89,12 +88,12 @@ fun SearchBar(){
                 onValueChange = {},
                 modifier = Modifier.weight(0.5f),
                 textStyle = TextStyle(fontSize = 16.sp),
-                        colors = TextFieldDefaults.textFieldColors(
-                            containerColor = Color.White,
-                focusedIndicatorColor = Color.Blue,
-                unfocusedIndicatorColor = Color.Gray,
-                cursorColor = Color.Red
-            )
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.White,
+                    focusedIndicatorColor = Color.Blue,
+                    unfocusedIndicatorColor = Color.Gray,
+                    cursorColor = Color.Red
+                )
             )
 
 
@@ -112,16 +111,17 @@ fun SearchBar(){
                 onValueChange = {},
                 modifier = Modifier.weight(0.5f),
                 textStyle = TextStyle(fontSize = 16.sp),
-                        colors = TextFieldDefaults.textFieldColors(
-                        containerColor = Color.White,
-                focusedIndicatorColor = Color.Blue,
-                unfocusedIndicatorColor = Color.Gray,
-                cursorColor = Color.Red
-            ))
+                colors = TextFieldDefaults.textFieldColors(
+                    containerColor = Color.White,
+                    focusedIndicatorColor = Color.Blue,
+                    unfocusedIndicatorColor = Color.Gray,
+                    cursorColor = Color.Red
+                ))
 
 
         }
         TransportationSelect()
+
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = painterResource(id = R.drawable.map),
@@ -148,7 +148,7 @@ fun SearchBar(){
 }
 @Composable
 fun TransportationSelect(){
-var transports = listOf("10 min Taxi", "30 min Bus", "32 min MRT", "1h9min Walking")
+    var transports = listOf("10 min Taxi", "30 min Bus", "32 min MRT", "1h9min Walking")
     var selectedMode by remember { mutableStateOf(0) }
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
@@ -199,4 +199,5 @@ fun ShowEachTransportation(){
 @Composable
 fun MapShow(){
     MapView()
+
 }

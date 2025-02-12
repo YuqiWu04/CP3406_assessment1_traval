@@ -1,11 +1,12 @@
 package com.example.cp3406_assessment1_traval
-
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,14 +21,23 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -40,8 +50,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,6 +69,7 @@ class MainActivity5_booking_manager : ComponentActivity() {
             CP3406_assessment1_travalTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BookingManagerPageView(modifier = Modifier.padding(innerPadding))
+                    BottomNavigationUI()
                 }
             }
         }
@@ -74,12 +87,13 @@ fun BookingManagerPageView(modifier: Modifier=Modifier){
         Spacer(modifier = Modifier.height(20.dp))
         BooingImageView()
 
+
     }
 
 }
 @Composable
 fun BookingClassificationShow(){
-  var BookingButtons = listOf("Sightseeing Tickets","Hotel","Air tickets", "Restaurant")
+  val BookingButtons = listOf("Sightseeing Tickets","Hotel","Air tickets", "Restaurant")
     var SelectedBookingButton by remember { mutableStateOf(0) }
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
@@ -104,6 +118,8 @@ data class ImageItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTopApp() {
+    val context = LocalContext.current
+    var expanded by remember { mutableStateOf(false) }
     TopAppBar(
         title = { Text("Your booking housekeeper！", color = Color.Black, fontSize = 20.sp) },
         navigationIcon = {
@@ -112,14 +128,70 @@ fun MyTopApp() {
             }
         },
         actions = {
-            IconButton(onClick = {  }) {
-                Icon(Icons.Default.Add, contentDescription = "Add", tint = Color.Black)
+            Box {
+                IconButton(onClick = { expanded = true }) {
+                    Icon(Icons.Default.Add, contentDescription = "Add", tint = Color.Black)
+                }
+
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Upload File/PDF") },
+                        onClick = {
+                            Toast.makeText(context, "Uploading File...", Toast.LENGTH_SHORT).show()
+                            expanded = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Add New Item") },
+                        onClick = {
+                            Toast.makeText(context, "Adding New Item...", Toast.LENGTH_SHORT).show()
+                            expanded = false
+                        }
+                    )
+                }
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color(0xFF5EAA99),
         ))
 }
+data class NavItem(
+    val title: String,
+    val icon: ImageVector
+)
+@Composable
+fun BottomNavigationUI() {
+    var selectedIndex by remember { mutableStateOf(0) }
+    val navItems = listOf(
+        NavItem("Home", Icons.Default.Home),
+        NavItem("Travel", Icons.Default.DateRange),
+        NavItem("Booking", Icons.Default.Check),
+        NavItem("Budget", Icons.Default.Person),
+        NavItem("Notification", Icons.Default.Notifications)
+    )
+
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                navItems.forEachIndexed { index, item ->
+                    NavigationBarItem(
+                        selected = selectedIndex == index,
+                        onClick = { selectedIndex = index },
+                        icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                        label = { Text(text = item.title) }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        BookingManagerPageView(modifier = Modifier.padding(innerPadding))
+    }
+}
+
+
 @Composable
 fun BooingImageView() {
     val Tickets = listOf(
@@ -170,4 +242,6 @@ fun TicketImageCard(ticket:ImageItem){
 @Composable
 fun BookingManagerPageShow(){
     BookingManagerPageView()
+    BottomNavigationUI()
+
 }

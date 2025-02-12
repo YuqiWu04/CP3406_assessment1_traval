@@ -19,11 +19,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -56,6 +65,7 @@ class MainActivity7_notification : ComponentActivity() {
             CP3406_assessment1_travalTheme{
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NotificationView(modifier = Modifier.padding(innerPadding))
+                    BottomNavigationNotificationUI()
                 }
             }
         }
@@ -66,7 +76,7 @@ fun NotificationView(modifier: Modifier = Modifier){
 Box( modifier = Modifier
     .fillMaxSize()
     .padding(bottom = 8.dp)
-    .background(Color(0xFF5EAA99))){
+    .background(Color.White)){
     Image(
         painter = painterResource(id = R.drawable.smartplane),
         contentDescription = null,
@@ -87,7 +97,7 @@ Box( modifier = Modifier
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .heightIn(min = 500.dp),
+                .heightIn(min = 100.dp),
             elevation = CardDefaults.cardElevation(4.dp)){
             Spacer(modifier = Modifier.height(8.dp))
             NavigationBarsShow()
@@ -103,7 +113,7 @@ Box( modifier = Modifier
 }
 @Composable
 fun NavigationBarsShow(){
-    var BookingButtons = listOf("Itinerary and schedule","Transportation","Weather", "Travel preparation")
+    val BookingButtons = listOf("Itinerary and schedule","Transportation","Weather", "Travel preparation")
     var SelectedBookingButton by remember { mutableStateOf(0) }
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
@@ -156,10 +166,38 @@ fun NotificationDetailShow(){
 
 
 }
+@Composable
+fun BottomNavigationNotificationUI() {
+    var selectedIndex by remember { mutableStateOf(0) }
+    val navItems = listOf(
+        NavItem("Home", Icons.Default.Home),
+        NavItem("Travel", Icons.Default.DateRange),
+        NavItem("Booking", Icons.Default.Check),
+        NavItem("Budget", Icons.Default.Person),
+        NavItem("Notification", Icons.Default.Notifications)
+    )
 
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                navItems.forEachIndexed { index, item ->
+                    NavigationBarItem(
+                        selected = selectedIndex == index,
+                        onClick = { selectedIndex = index },
+                        icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                        label = { Text(text = item.title) }
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        NotificationView(modifier = Modifier.padding(innerPadding))
+    }
+}
 
 @Preview(showBackground = true, name = "Notification")
 @Composable
 fun NotificationShow() {
     NotificationView()
+    BottomNavigationNotificationUI()
 }

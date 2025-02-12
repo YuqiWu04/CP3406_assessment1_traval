@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CP3406_assessment1_travalTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { paddingValues ->
-                    LogpageImage(modifier = Modifier.padding(paddingValues))
+                    LogPageImage(modifier = Modifier.padding(paddingValues))
                 }
             }
         }
@@ -54,6 +55,7 @@ fun Login(modifier: Modifier = Modifier) {
         modifier = Modifier.fillMaxHeight().padding(10.dp)) {
         Text(
             text = "Login",
+            fontWeight = FontWeight.Bold,
             fontSize = 40.sp,
             modifier = modifier
         )
@@ -91,12 +93,12 @@ fun Login(modifier: Modifier = Modifier) {
 @Composable
 fun UserInput() {
     CP3406_assessment1_travalTheme {
-        LogpageImage()
+        LogPageImage()
     }
 }
 @Composable
-fun LogpageImage(modifier: Modifier = Modifier) {
-    val image = painterResource(R.drawable.login)
+fun LogPageImage(modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.lo)
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
