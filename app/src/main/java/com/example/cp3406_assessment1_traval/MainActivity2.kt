@@ -52,6 +52,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -113,7 +114,7 @@ Row(modifier = Modifier.fillMaxWidth()){
         Text(text = "Read More")
     }
     TextButton(onClick = {  }) {
-        Text(text = "AI-Assisted Planning")
+        Text(text = "ChatGPT-AI-Assisted Planning", fontSize = 18.sp, fontWeight = FontWeight.Bold)
     }
 }
 

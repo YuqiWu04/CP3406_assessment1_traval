@@ -36,7 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cp3406_assessment1_traval.ui.theme.CP3406_assessment1_travalTheme
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.DateRange
@@ -57,16 +58,14 @@ class MainActivity3 : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CP3406_assessment1_travalTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DashboardView(modifier = Modifier.padding(innerPadding))
-                    BottomNavigationHomeUI()
-                }
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                DashboardView(modifier = Modifier.padding(innerPadding))
+                BottomNavigationDashUI()
             }
     }}
 }
 @Composable
-fun BottomNavigationHomeUI() {
+fun BottomNavigationDashUI() {
     var selectedIndex by remember { mutableStateOf(0) }
     val navItems = listOf(
         NavItem("Home", Icons.Default.Home),
@@ -93,55 +92,10 @@ fun BottomNavigationHomeUI() {
         DashboardView(modifier = Modifier.padding(innerPadding))
     }
 }
-@Composable
-fun ImageCard(category: CategoryItem) {
-    Column(
-        modifier = Modifier.width(80.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(
-            modifier = Modifier
-                .size(80.dp)
-                .clip(RoundedCornerShape(18.dp)),
-            elevation = CardDefaults.cardElevation(4.dp)
-        ) {
 
-            Image(
-                painter = painterResource(category.iconRes),
-                contentDescription = "Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize().clickable {
-                    println("Image Button Clicked!")
-                }
-            )
-        }
-        Spacer(modifier = Modifier.height(5.dp))
 
-        Text(
-            text = category.label,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color.Black,
-            textAlign = TextAlign.Center
-        )
-    }
-}
 data class CategoryItem(val iconRes: Int, val label: String)
-@Composable
-fun CategoryIconsRow(){
-    val categories = listOf( CategoryItem(R.drawable.traval, "Itinerary"),
-    CategoryItem(R.drawable.budget, "Finance"),
-    CategoryItem(R.drawable.smart, "Notification"),
-    CategoryItem(R.drawable.bookingmanagenment, "Booking Management"))
-    LazyRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(13.dp)
-    ) {
-        items(categories) { category ->
-            ImageCard(category)
-        }
-    }
-}
+
 @Composable
 fun CityRecommend(){
     val Cities = listOf( CategoryItem(R.drawable.hongkong, "HongKong"),
@@ -191,39 +145,56 @@ fun CityCard(city: CategoryItem) {
 
 @Composable
 fun DashboardView(modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    val recentCity = "Singapore"
+    Box(modifier = modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.back),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxWidth()
-                .height(350.dp)
+                .fillMaxSize()
+                .height(800.dp)
         )
+
         Card(
             shape = RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp),
-            colors = CardDefaults.cardColors(containerColor = Color((0xFFF0F8FF))),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF0F8FF)),
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .heightIn(min = 650.dp)
+                .heightIn(min = 550.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
+                    .verticalScroll(rememberScrollState())
             ) {
                 Text(
-                    text = "Hi,Mr.Wu!!",
+                    text = "Hi, Mr.Wu!!",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
-                CategoryIconsRow()
+                Text(
+                    text = "Your recent itinerary destination: $recentCity",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                Text(
+                    text = "The next 3 to 5 days in Singapore will be cloudy with occasional thundershowers!!!",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
-                    text = "Recommendation：",
+                    text = "Recommendation City:",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
@@ -231,17 +202,42 @@ fun DashboardView(modifier: Modifier = Modifier) {
                 )
 
                 CityRecommend()
+                Spacer(modifier = Modifier.height(32.dp))
+                Text(
+                    text = "Top in $recentCity:",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                AttractionRecommend()
             }
-
         }
+    }
+}
+@Composable
+fun AttractionRecommend(){
+    val attractions = listOf( CategoryItem(R.drawable.hsizi, "MerLion Park"),
+        CategoryItem(R.drawable.gardon, "Garden"),
+        CategoryItem(R.drawable.chinatown, "ChinaTown"),
+        CategoryItem(R.drawable.unsw, "Universal Studios"))
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(attractions) { attraction ->
+            CityCard(attraction)
+        }
+    }
+}
+@Preview(showBackground = true, name = "Dashboard")
+@Composable
+fun DashboardShow() {
+    CP3406_assessment1_travalTheme {
+        DashboardView()
+        BottomNavigationDashUI()
     }
 
 }
 
-@Preview(showBackground = true, name = "Dashboard")
-@Composable
-fun DashboardShow() {
-    DashboardView()
-    BottomNavigationHomeUI()
-}
 
