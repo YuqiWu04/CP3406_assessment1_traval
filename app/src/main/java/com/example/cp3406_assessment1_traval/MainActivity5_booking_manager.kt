@@ -83,7 +83,7 @@ fun BookingManagerPageView(modifier: Modifier=Modifier){
         Spacer(modifier = Modifier.height(40.dp))
         BookingClassificationShow()
         Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "Date: 01/11/2024 Booking Information", fontSize = 20.sp)
+        Text(text = "Date: 01.11.2024--- 05.11.2024", fontSize = 20.sp)
         Spacer(modifier = Modifier.height(20.dp))
         BooingImageView()
 
@@ -195,8 +195,8 @@ fun BottomNavigationUI() {
 @Composable
 fun BooingImageView() {
     val Tickets = listOf(
-        ImageItem(R.drawable.zhiwuyuan, "2:00pm Botanical Garden"),
-        ImageItem(R.drawable.weiduoliya, "9:30pm Night Boats") ,ImageItem(R.drawable.huanghelou, "5:00pm Yellow Crane Tower")
+        ImageItem(R.drawable.zhiwuyuan, "01.11: 2:00pm Botanical Garden"),
+        ImageItem(R.drawable.weiduoliya, "02.11: 9:30pm Night Boats") ,ImageItem(R.drawable.huanghelou, "04.11.2024: 5:00pm Yellow Crane Tower"),ImageItem(R.drawable.wechatimg586, "Beijing wall")
     )
 
     LazyColumn(
