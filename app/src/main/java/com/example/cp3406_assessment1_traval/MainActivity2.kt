@@ -137,7 +137,7 @@ Row(modifier = Modifier.fillMaxWidth()){
 
                         .shadow(10.dp, RoundedCornerShape(10.dp))
                     .background(Color.White ,shape = RoundedCornerShape(12.dp))
-                        .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, // 水平居中
+                        .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center){
 
                     Text(
